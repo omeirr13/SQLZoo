@@ -84,6 +84,14 @@ FROM game g INNER JOIN (SELECT matchid, player FROM goal) go
 ON g.id = go.matchid
 WHERE g.stadium = 'National Stadium, Warsaw';
 
+SELECT go.player
+FROM goal go INNER JOIN
+(SELECT id FROM game WHERE stadium = 'National Stadium, Warsaw')  g ON go.matchid = g.id;
+
+
+SELECT go.player
+FROM (SELECT matchid, player FROM goal) go INNER JOIN
+(SELECT id FROM game WHERE stadium = 'National Stadium, Warsaw')  g ON go.matchid = g.id;
 
 -- 8. Instead show the name of all players who scored a goal against Germany.
 
@@ -109,4 +117,6 @@ SELECT e.teamname, COUNT(*)
 FROM goal g INNER JOIN eteam e
 ON g.teamid = e.id
 GROUP BY e.teamname
+
+
 
